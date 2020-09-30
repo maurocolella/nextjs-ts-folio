@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "latest",
+    "pdf2json": "^1.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
