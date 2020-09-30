@@ -8,13 +8,15 @@ import readPDF from '../components/PDFReader'
 type Props = {
   clientId: string
   pdfText: string
+  filePath: string
 }
 
 export const getStaticProps: GetStaticProps = async() => {
   return {
     props: {
       clientId: process.env.NEXT_PUBLIC_ADOBE_API_KEY,
-      pdfText: await readPDF('Mauro Colella_Resume_2020.pdf'),
+      pdfText: await readPDF(process.env.NEXT_RESUME_FILE_PATH!),
+      filePath: process.env.NEXT_RESUME_FILE_PATH
     }
   }
 }
@@ -24,9 +26,7 @@ const ResumePage = class extends Component<Props> {
     const viewSDKClient = new AdobeViewSDKClient(this.props);
 
     viewSDKClient.ready().then(() => {
-        /* Invoke file preview */
         viewSDKClient.previewFile('pdf-div', {
-            /* Pass the embed mode option here */
             embedMode: 'IN_LINE'
         });
     });

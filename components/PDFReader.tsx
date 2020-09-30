@@ -22,8 +22,8 @@ export default async function readPDF(fileName: string) {
                   ${b.R[0].TS[1] > 15 ? '<strong>':''}
                   ${
                     decodeURIComponent(b?.R[0]?.T)
-                      .replace('', '<li/>')
-                      .replace('◦', '<li/>')
+                      .replace('', '<li>')
+                      .replace('◦', '<li>')
                   }
                   ${b.R[0].TS[1] > 15 ? '</strong>':''}
                   `

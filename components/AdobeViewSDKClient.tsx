@@ -15,6 +15,7 @@ export default class AdobeViewSDKClient {
   readyPromise: any
   adobeDCView: any
   clientId: string
+  filePath: string
 
   constructor(props: any) {
     this.clientId = props.clientId
@@ -30,6 +31,7 @@ export default class AdobeViewSDKClient {
         }
     });
     this.adobeDCView = undefined;
+    this.filePath = props.filePath
   }
 
   ready() {
@@ -57,13 +59,13 @@ export default class AdobeViewSDKClient {
           content: {
               /* Location of file where it is hosted */
               location: {
-                  url: "Mauro Colella_Resume_2020.pdf",
+                  url: this.filePath,
               },
           },
           /* Pass meta data of file */
           metaData: {
               /* file name */
-              fileName: "Mauro Colella_Resume_2020.pdf",
+              fileName: this.filePath,
               /* file ID */
               // id: "6d07d124-ac85-43b3-a867-36930f502ac6",
           }
