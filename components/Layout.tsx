@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
+import Header from './Header'
+import Footer from './Footer'
 
 type Props = {
   children?: ReactNode
@@ -22,22 +23,11 @@ const Layout = class extends Component<Props> {
           <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <header>
-          <nav>
-            <Link href="/">
-              <a>About</a>
-            </Link>{' '}
-            |{' '}
-            <Link href="/resume">
-              <a>Resume</a>
-            </Link>
-          </nav>
-        </header>
-        {children}
-        <footer>
-          <hr />
-          <span>(Footer)</span>
-        </footer>
+        <Header />
+        <main>
+          {children}
+        </main>
+        <Footer />
       </div>
     )
   }
