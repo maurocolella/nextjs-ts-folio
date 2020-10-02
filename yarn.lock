@@ -4272,6 +4272,11 @@ shell-quote@1.7.2:
   resolved "https://registry.npmjs.org/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
+simplex-noise@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/simplex-noise/-/simplex-noise-2.4.0.tgz#81b3458fb22dccc3bc8dd9a977c73797f86f523a"
+  integrity sha512-OjyDWm/QZjVbMrPxDVi9b2as+SeNn9EBXlrWVRlFW+TSyWMSXouDryXkQN0vf5YP+QZKobrmkvx1eQYPLtuqfw==
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"

@@ -9,7 +9,7 @@ export default class SunIcon extends PureComponent<Props> {
     const { className } = this.props
 
     return (
-      <svg viewBox="0 0 64 64" className={className} width="64" height="64">
+      <svg viewBox="0 0 64 64" className={className} width="0">
         <g>
           <circle
             strokeMiterlimit="10"

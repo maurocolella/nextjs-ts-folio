@@ -1,8 +1,22 @@
+import App from 'next/app'
+import { Header, Nav, Footer } from '../components'
+
 import 'normalize.css/normalize.css'
 import './global.scss'
 
-function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+class MyApp extends App {
+  render() {
+    const { Component, pageProps } = this.props;
+
+    return (
+      <>
+        <Header />
+        <Nav />
+        <Component {...pageProps} />
+        <Footer />
+      </>
+    );
+  }
 }
 
-export default App
+export default MyApp;
