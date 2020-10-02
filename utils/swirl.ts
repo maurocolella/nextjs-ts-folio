@@ -1,5 +1,5 @@
 import SimplexNoise from "simplex-noise";
-import { rand, randRange, TAU, lerp, cos, sin, fadeInOut } from './effect-util';
+import { rand, randRange, TAU, lerp, cos, sin, fadeInOut } from './effect-utils';
 
 const particleCount = 700;
 const particlePropCount = 9;
