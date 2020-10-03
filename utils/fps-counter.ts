@@ -3,10 +3,10 @@ class FPSCounterSingleton {
 
   fps: number = 0;
 
-  handle?: number;
+  runnerHandle?: number;
 
   play = () => {
-    this.handle = window.requestAnimationFrame(() => {
+    this.runnerHandle = window.requestAnimationFrame(() => {
       const now = performance.now();
       while (this.times.length > 0 && this.times[0] <= now - 1000) {
         this.times.shift();
@@ -18,7 +18,7 @@ class FPSCounterSingleton {
   }
 
   pause = () => {
-    window.cancelAnimationFrame(this.handle as number);
+    window.cancelAnimationFrame(this.runnerHandle as number);
   }
 
   getFps() {

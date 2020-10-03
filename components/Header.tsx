@@ -3,14 +3,15 @@ import { Component, createRef } from 'react';
 import { Logo } from './Logo';
 import { SunIcon } from './icons/SunIcon';
 
-import { FPSCounter, setupSwirl } from '../utils';
+import { FPSCounter, SwirlEffect } from '../utils';
 
 import styles from './styles/Header.module.scss';
 
 type State = {
-  FPSCounter: any
-  measures: Array<number>
+  fpsCounter?: typeof FPSCounter
+  effect?: SwirlEffect
   effectVisible: boolean
+  measures: Array<number>
 };
 
 const NUM_SAMPLES = 15;
@@ -25,17 +26,18 @@ export class Header extends Component<{}, State> {
     super(props);
     this.effectCanvasRef = createRef();
     this.state = {
-      FPSCounter,
-      'effectVisible': false,
-      'measures': [],
+      effect: undefined,
+      effectVisible: false,
+      fpsCounter: FPSCounter,
+      measures: [],
     };
   }
 
   instrument = () => {
-    const { measures, FPSCounter } = this.state;
+    const { effect, fpsCounter, measures } = this.state;
 
     if (measures.length < NUM_SAMPLES) {
-      const measure = FPSCounter.getFps();
+      const measure = fpsCounter!.getFps();
 
       measures.push(measure);
 
@@ -45,18 +47,23 @@ export class Header extends Component<{}, State> {
 
       const average = measures.reduce((a: number, b: number) => (a + b) / 2, 0);
 
-      if (average > 50) this.setState({ 'effectVisible': true });
+      if (average > 50) {
+        return this.setState({ 'effectVisible': true });
+      }
+      effect!.destroy();
     }
   }
 
   componentDidMount() {
-    setupSwirl(this.effectCanvasRef.current);
+    this.setState({ effect: new SwirlEffect(this.effectCanvasRef.current) });
     FPSCounter.play();
     this.timer = setInterval(this.instrument, SAMPLING_INTERVAL);
   }
 
   componentWillUnmount() {
-    FPSCounter.pause();
+    const { effect, fpsCounter } = this.state;
+    fpsCounter!.pause();
+    effect!.destroy();
   }
 
   render() {

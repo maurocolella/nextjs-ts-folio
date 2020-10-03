@@ -26,15 +26,7 @@ let center: Array<number>;
 let tick: number;
 let simplex: { noise3D: (arg0: number, arg1: number, arg2: number) => number; };
 let particleProps: Float32Array;
-
-export function setupSwirl(el: any) {
-  container = el;
-  createCanvas();
-  resize();
-  initParticles();
-  draw();
-  window.addEventListener('resize', resize);
-}
+let runnerHandle: number;
 
 function initParticles() {
   tick = 0;
@@ -202,5 +194,23 @@ function draw() {
   renderGlow();
   renderToScreen();
 
-  window.requestAnimationFrame(draw);
+  runnerHandle = window.requestAnimationFrame(draw);
+}
+
+export class SwirlEffect {
+  constructor(el: any) {
+    container = el;
+    createCanvas();
+    resize();
+    initParticles();
+    draw();
+    window.addEventListener('resize', resize);
+  }
+
+  destroy() {
+    window.removeEventListener('resize', resize);
+    window.cancelAnimationFrame(runnerHandle);
+    container.removeChild(canvas.b);
+    delete canvas.a;
+  }
 }
