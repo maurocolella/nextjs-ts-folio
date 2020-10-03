@@ -5,4 +5,3 @@ export * from './Layout';
 export * from './Logo';
 export * from './Nav';
 export * from './Noscript';
-export * from './PDFReader';

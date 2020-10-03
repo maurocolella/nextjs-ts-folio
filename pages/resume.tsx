@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import React, { Component } from 'react';
-import { AdobeViewSDKClient, Layout, Noscript, readPDF } from '../components';
+import { AdobeViewSDKClient, Layout, Noscript } from '../components';
 
 type Props = {
   clientId: string
@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps = async() => {
     'props': {
       'clientId': process.env.NEXT_PUBLIC_ADOBE_API_KEY,
       'filePath': process.env.NEXT_RESUME_FILE_PATH,
-      'pdfText': await readPDF(process.env.NEXT_RESUME_FILE_PATH!),
+      'pdfText': await require('../components/PDFReader').readPDF(process.env.NEXT_RESUME_FILE_PATH!),
     }
   };
 };
