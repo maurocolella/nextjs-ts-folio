@@ -15,7 +15,7 @@ type State = {
 };
 
 const NUM_SAMPLES = 15;
-const SAMPLING_INTERVAL = 150;
+const SAMPLING_INTERVAL = 120;
 
 export class Header extends Component<{}, State> {
   effectCanvasRef: any;
