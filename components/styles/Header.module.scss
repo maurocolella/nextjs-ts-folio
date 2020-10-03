@@ -1,3 +1,5 @@
+@import './globals.scss';
+
 .header {
   background-color: #123;
   display: flex;
@@ -34,7 +36,7 @@
 
   @media(min-width: 768px) {
     background-color: rgba(0, 12, 27, 0.45);
-    width: 61.8vw;
+    width: $page-width;
   }
 
   &__title {

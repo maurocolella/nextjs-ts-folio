@@ -21,7 +21,7 @@ export class Layout extends Component<Props> {
           <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <main>
+        <main style={{ paddingTop: '52px' }}>
           {children}
         </main>
       </div>

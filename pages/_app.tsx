@@ -1,5 +1,5 @@
 import App from 'next/app';
-import { Footer, Header, Nav } from '../components';
+import { Footer, Header, Navbar } from '../components';
 
 import 'normalize.css/normalize.css';
 import './global.scss';
@@ -15,7 +15,7 @@ export class Main extends App {
     return (
       <>
         <Header />
-        <Nav />
+        <Navbar />
         <Component {...pageProps} />
         <Footer />
       </>
