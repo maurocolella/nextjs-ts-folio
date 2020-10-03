@@ -1,8 +1,8 @@
 import { PureComponent } from 'react';
 
-import styles from './styles/Logo.module.scss'
+import styles from './styles/Logo.module.scss';
 
-class Logo extends PureComponent {
+export class Logo extends PureComponent {
   render() {
     return (
       <svg viewBox="0 0 159 23" className={styles.logo}>
@@ -34,5 +34,3 @@ class Logo extends PureComponent {
     );
   }
 }
-
-export default Logo;

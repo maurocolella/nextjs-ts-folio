@@ -2,11 +2,11 @@ import { PureComponent } from 'react';
 
 type Props = {
   className?: string
-}
+};
 
-export default class SunIcon extends PureComponent<Props> {
+export class SunIcon extends PureComponent<Props> {
   render() {
-    const { className } = this.props
+    const { className } = this.props;
 
     return (
       <svg viewBox="0 0 64 64" className={className} width="0">

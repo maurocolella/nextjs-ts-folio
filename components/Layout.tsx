@@ -1,18 +1,18 @@
-import React, { Component, ReactNode } from 'react'
-import Head     from 'next/head'
+import Head     from 'next/head';
+import React, { Component, ReactNode } from 'react';
 
 type Props = {
   children?: ReactNode
   title?: string
-}
+};
 
-const Layout = class extends Component<Props> {
+export class Layout extends Component<Props> {
   constructor(props: Props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    const { title, children } = this.props
+    const { title, children } = this.props;
 
     return (
       <div>
@@ -25,8 +25,6 @@ const Layout = class extends Component<Props> {
           {children}
         </main>
       </div>
-    )
+    );
   }
 }
-
-export default Layout

@@ -1,9 +1,9 @@
-class _FPSCounter {
-  times: number[] = []
+class FPSCounterSingleton {
+  times: Array<number> = [];
 
-  fps: number = 0
+  fps: number = 0;
 
-  handle?: number
+  handle?: number;
 
   play = () => {
     this.handle = window.requestAnimationFrame(() => {
@@ -18,14 +18,14 @@ class _FPSCounter {
   }
 
   pause = () => {
-    window.cancelAnimationFrame(this.handle as number)
+    window.cancelAnimationFrame(this.handle as number);
   }
 
   getFps() {
-    return this.fps
+    return this.fps;
   }
 }
 
-const FPSCounter = new _FPSCounter()
+const FPSCounter = new FPSCounterSingleton();
 
-export { FPSCounter }
+export { FPSCounter };

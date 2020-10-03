@@ -1,4 +1,4 @@
-import Layout from '../components/Layout'
+import { Layout } from '../components/Layout';
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
@@ -20,6 +20,7 @@ const IndexPage = () => (
       <p>I make it simple. For you.</p>
     </article>
   </Layout>
-)
+);
 
-export default IndexPage
+// tslint:disable-next-line: no-default-export
+export default IndexPage;

@@ -1,5 +1,5 @@
-import SimplexNoise from "simplex-noise";
-import { rand, randRange, TAU, lerp, cos, sin, fadeInOut } from './effect-utils';
+import SimplexNoise from 'simplex-noise';
+import { TAU, cos, fadeInOut, lerp, rand, randRange, sin } from './effect-utils';
 
 const particleCount = 700;
 const particlePropCount = 9;
@@ -22,13 +22,13 @@ const backgroundColor = 'hsla(260,40%,5%,1)';
 let container: any;
 let canvas: any;
 let ctx: any;
-let center: number[];
+let center: Array<number>;
 let tick: number;
 let simplex: { noise3D: (arg0: number, arg1: number, arg2: number) => number; };
 let particleProps: Float32Array;
 
 export function setupSwirl(el: any) {
-  container = el
+  container = el;
   createCanvas();
   resize();
   initParticles();
@@ -49,6 +49,7 @@ function initParticles() {
 }
 
 function initParticle(i: number | undefined) {
+  // tslint:disable-next-line: one-variable-per-declaration
   let x, y, vx, vy, life, ttl, speed, radius, hue;
 
   x = rand(canvas.a.width);
@@ -73,7 +74,15 @@ function drawParticles() {
 }
 
 function updateParticle(i: number) {
-  let i2=1+i, i3=2+i, i4=3+i, i5=4+i, i6=5+i, i7=6+i, i8=7+i, i9=8+i;
+  let i2 = 1 + i;
+  let i3 = 2 + i;
+  let i4 = 3 + i;
+  let i5 = 4 + i;
+  let i6 = 5 + i;
+  let i7 = 6 + i;
+  let i8 = 7 + i;
+  let i9 = 8 + i;
+  // tslint:disable-next-line: one-variable-per-declaration
   let n, x, y, vx, vy, life, ttl, speed, x2, y2, radius, hue;
 
   x = particleProps[i];
@@ -110,7 +119,7 @@ function drawParticle(x: number, y: number, x2: number, y2: number, life: number
   ctx.a.beginPath();
   ctx.a.moveTo(x, y);
   ctx.a.lineTo(x2, y2);
-  ctx.a.stroke()
+  ctx.a.stroke();
   ctx.a.closePath();
   ctx.a.restore();
 }
@@ -126,8 +135,8 @@ function checkBounds(x: number, y: number) {
 
 function createCanvas() {
   canvas = {
-    a: document.createElement('canvas'),
-    b: document.createElement('canvas')
+    'a': document.createElement('canvas'),
+    'b': document.createElement('canvas')
   };
   canvas.b.style = `
     top: 0;
@@ -137,8 +146,8 @@ function createCanvas() {
   `;
   container!.appendChild(canvas.b);
   ctx = {
-    a: canvas.a.getContext('2d'),
-    b: canvas.b.getContext('2d')
+    'a': canvas.a.getContext('2d'),
+    'b': canvas.b.getContext('2d')
   };
   center = [];
 }

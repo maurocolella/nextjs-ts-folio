@@ -1,66 +1,66 @@
 
-import { Component, createRef } from 'react'
-import Logo from './Logo'
-import SunIcon from './icons/SunIcon'
+import { Component, createRef } from 'react';
+import { Logo } from './Logo';
+import { SunIcon } from './icons/SunIcon';
 
-import { setupSwirl, FPSCounter } from '../utils'
+import { FPSCounter, setupSwirl } from '../utils';
 
-import styles from './styles/Header.module.scss'
+import styles from './styles/Header.module.scss';
 
 type State = {
   FPSCounter: any
-  measures: number[]
+  measures: Array<number>
   effectVisible: boolean
-}
+};
 
-const NUM_SAMPLES = 15
-const SAMPLING_INTERVAL = 150
+const NUM_SAMPLES = 15;
+const SAMPLING_INTERVAL = 150;
 
-class Header extends Component<{}, State> {
-  effectCanvasRef: any
+export class Header extends Component<{}, State> {
+  effectCanvasRef: any;
 
-  timer: any
+  timer: any;
 
   constructor(props: Readonly<{}>) {
-    super(props)
-    this.effectCanvasRef = createRef()
+    super(props);
+    this.effectCanvasRef = createRef();
     this.state = {
       FPSCounter,
-      measures: [],
-      effectVisible: false,
-    }
+      'effectVisible': false,
+      'measures': [],
+    };
   }
 
   instrument = () => {
-    const { measures, FPSCounter } = this.state
+    const { measures, FPSCounter } = this.state;
 
     if (measures.length < NUM_SAMPLES) {
-      const measure = FPSCounter.getFps()
+      const measure = FPSCounter.getFps();
 
-      measures.push(measure)
+      measures.push(measure);
 
-      this.setState({ measures })
+      this.setState({ measures });
     } else {
-      clearInterval(this.timer)
+      clearInterval(this.timer);
 
-      const average = measures.reduce((a: number, b: number) => (a + b) / 2, 0)
+      const average = measures.reduce((a: number, b: number) => (a + b) / 2, 0);
 
-      if (average > 50) this.setState({ effectVisible: true })
+      if (average > 50) this.setState({ 'effectVisible': true });
     }
   }
 
   componentDidMount() {
-    setupSwirl(this.effectCanvasRef.current)
-    FPSCounter.play()
-    this.timer = setInterval(this.instrument, SAMPLING_INTERVAL)
+    setupSwirl(this.effectCanvasRef.current);
+    FPSCounter.play();
+    this.timer = setInterval(this.instrument, SAMPLING_INTERVAL);
   }
 
   componentWillUnmount() {
-    FPSCounter.pause()
+    FPSCounter.pause();
   }
 
   render() {
-    const { effectVisible } = this.state
+    const { effectVisible } = this.state;
 
     return (
       <header className={styles.header}>
@@ -68,7 +68,7 @@ class Header extends Component<{}, State> {
           <a href="/">
             <h1 className={styles.hero__title}><Logo /></h1>
           </a>
-          <a href="/" className={styles['hero-button']} style={{ alignSelf: 'flex-end' }}>
+          <a href="/" className={styles['hero-button']} style={{ 'alignSelf': 'flex-end' }}>
             Hire Me
             <SunIcon className={styles['hero-button__icon']}/>
           </a>
@@ -82,13 +82,10 @@ class Header extends Component<{}, State> {
           ref={this.effectCanvasRef}
           className={styles.header__cover}
           style={{
-            opacity: effectVisible ? 1 : 0,
-            transition: 'opacity ease 1s',
+            'opacity': effectVisible ? 1 : 0,
+            'transition': 'opacity ease 1s',
           }} />
       </header>
-    )
+    );
   }
 }
-
-export { Header }
-export default Header

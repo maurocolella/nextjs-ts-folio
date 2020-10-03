@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 // We don't want to send 'react-dom/server' to the client
-let ReactDOMServer: { renderToStaticMarkup: (arg0: any) => any }
+let ReactDOMServer: { renderToStaticMarkup: (arg0: any) => any };
 if (typeof window === 'undefined') {
-  ReactDOMServer = require('react-dom/server')
+  ReactDOMServer = require('react-dom/server');
 }
 
-export default function Noscript ({ children } : { children: any }) {
+export function Noscript ({ children }: { children: any }) {
   if (!ReactDOMServer) {
-    return null
+    return null;
   }
-  const staticMarkup = ReactDOMServer.renderToStaticMarkup(children)
-  return <noscript dangerouslySetInnerHTML={{ __html: staticMarkup }} />
+  const staticMarkup = ReactDOMServer.renderToStaticMarkup(children);
+  return <noscript dangerouslySetInnerHTML={{ '__html': staticMarkup }} />;
 }

@@ -1,7 +1,7 @@
 
-import Link from 'next/link'
+import Link from 'next/link';
 
-const Nav = function() {
+export const Nav = function() {
   return (
     <nav>
       <Link href="/">
@@ -12,8 +12,5 @@ const Nav = function() {
         <a>Resume</a>
       </Link>
     </nav>
-  )
-}
-
-export { Nav }
-export default Nav
+  );
+};

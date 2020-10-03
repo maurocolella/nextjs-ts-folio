@@ -9,16 +9,16 @@ then your use, modification, or distribution of it requires the prior
 written permission of Adobe.
 */
 
-type decoratedWindow = typeof window & { AdobeDC: any }
+type decoratedWindow = typeof window & { AdobeDC: any };
 
-export default class AdobeViewSDKClient {
-  readyPromise: any
-  adobeDCView: any
-  clientId: string
-  filePath: string
+export class AdobeViewSDKClient {
+  readyPromise: any;
+  adobeDCView: any;
+  clientId: string;
+  filePath: string;
 
   constructor(props: any) {
-    this.clientId = props.clientId
+    this.clientId = props.clientId;
 
     this.readyPromise = new Promise((resolve) => {
         if ((window as decoratedWindow).AdobeDC) {
@@ -31,7 +31,7 @@ export default class AdobeViewSDKClient {
         }
     });
     this.adobeDCView = undefined;
-    this.filePath = props.filePath
+    this.filePath = props.filePath;
   }
 
   ready() {
@@ -39,12 +39,12 @@ export default class AdobeViewSDKClient {
   }
 
   previewFile(divId: string, viewerConfig: any) {
-      const config : {
+      const config: {
         clientId: string
         divId?: string
       } = {
           /* Pass your registered client id */
-          clientId: this.clientId,
+          'clientId': this.clientId,
       };
       if (divId) { /* Optional only for Light Box embed mode */
           /* Pass the div id in which PDF should be rendered */
@@ -56,16 +56,16 @@ export default class AdobeViewSDKClient {
       /* Invoke the file preview API on Adobe DC View object */
       const previewFilePromise = this.adobeDCView.previewFile({
           /* Pass information on how to access the file */
-          content: {
+          'content': {
               /* Location of file where it is hosted */
-              location: {
-                  url: this.filePath,
+              'location': {
+                  'url': this.filePath,
               },
           },
           /* Pass meta data of file */
-          metaData: {
+          'metaData': {
               /* file name */
-              fileName: this.filePath,
+              'fileName': this.filePath,
               /* file ID */
               // id: "6d07d124-ac85-43b3-a867-36930f502ac6",
           }
