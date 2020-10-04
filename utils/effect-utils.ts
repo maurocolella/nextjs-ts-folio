@@ -9,7 +9,7 @@ export const randRange = (n: number) => n - rand(2 * n);
 export const fadeIn = (t: number, m: number) => t / m;
 export const fadeOut = (t: number, m: number) => (m - t) / m;
 export const fadeInOut = (t: number, m: number) => {
-  let hm = 0.5 * m;
+  const hm = 0.5 * m;
   return abs((t + hm) % m - hm) / (hm);
 };
 export const dist = (x1: number, y1: number, x2: number, y2: number) => sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));

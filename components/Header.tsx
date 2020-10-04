@@ -1,5 +1,5 @@
 
-import { Component, createRef } from 'react';
+import { Component, RefObject, createRef } from 'react';
 import { Logo } from './Logo';
 import { SunIcon } from './icons/SunIcon';
 
@@ -18,9 +18,9 @@ const NUM_SAMPLES = 15;
 const SAMPLING_INTERVAL = 120;
 
 export class Header extends Component<{}, State> {
-  effectCanvasRef: any;
+  effectCanvasRef: RefObject<HTMLDivElement>;
 
-  timer: any;
+  timer = 0;
 
   constructor(props: Readonly<{}>) {
     super(props);
@@ -43,7 +43,7 @@ export class Header extends Component<{}, State> {
 
       this.setState({ measures });
     } else {
-      clearInterval(this.timer);
+      window.clearInterval(this.timer);
 
       const average = measures.reduce((a: number, b: number) => (a + b) / 2, 0);
 
@@ -57,9 +57,9 @@ export class Header extends Component<{}, State> {
 
   componentDidMount() {
     const { fpsCounter } = this.state;
-    this.setState({ effect: new SwirlEffect(this.effectCanvasRef.current) });
+    if (this.effectCanvasRef.current) this.setState({ effect: new SwirlEffect(this.effectCanvasRef.current) });
     fpsCounter!.play();
-    this.timer = setInterval(this.instrument, SAMPLING_INTERVAL);
+    this.timer = window.setInterval(this.instrument, SAMPLING_INTERVAL);
   }
 
   componentWillUnmount() {

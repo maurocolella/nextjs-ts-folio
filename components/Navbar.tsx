@@ -3,16 +3,19 @@ import { PureComponent, RefObject, createRef } from 'react';
 
 import styles from './styles/Navbar.module.scss';
 
+
+type Props = {};
+
 type State = {
   currentOffset: number
   navbarSticky: boolean
   startOffset: number
 };
 
-export class Navbar extends PureComponent<{}, State> {
+export class Navbar extends PureComponent<Props, State> {
   navbarRef: RefObject<HTMLElement>;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.navbarRef = createRef();

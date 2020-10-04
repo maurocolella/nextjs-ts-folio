@@ -19,9 +19,15 @@ const yOff = 0.00125;
 const zOff = 0.0005;
 const backgroundColor = 'hsla(220,50%,5%,1)';
 
-let container: any;
-let canvas: any;
-let ctx: any;
+let container: HTMLElement;
+let canvas: {
+  a: HTMLCanvasElement
+  b: HTMLCanvasElement
+};
+let ctx: {
+  a: CanvasRenderingContext2D | null
+  b: CanvasRenderingContext2D | null
+};
 let center: Array<number>;
 let tick: number;
 let simplex: { noise3D: (arg0: number, arg1: number, arg2: number) => number; };
@@ -66,14 +72,14 @@ function drawParticles() {
 }
 
 function updateParticle(i: number) {
-  let i2 = 1 + i;
-  let i3 = 2 + i;
-  let i4 = 3 + i;
-  let i5 = 4 + i;
-  let i6 = 5 + i;
-  let i7 = 6 + i;
-  let i8 = 7 + i;
-  let i9 = 8 + i;
+  const i2 = 1 + i;
+  const i3 = 2 + i;
+  const i4 = 3 + i;
+  const i5 = 4 + i;
+  const i6 = 5 + i;
+  const i7 = 6 + i;
+  const i8 = 7 + i;
+  const i9 = 8 + i;
   // tslint:disable-next-line: one-variable-per-declaration
   let n, x, y, vx, vy, life, ttl, speed, x2, y2, radius, hue;
 
@@ -104,16 +110,16 @@ function updateParticle(i: number) {
 }
 
 function drawParticle(x: number, y: number, x2: number, y2: number, life: number, ttl: number, radius: number, hue: number) {
-  ctx.a.save();
-  ctx.a.lineCap = 'round';
-  ctx.a.lineWidth = radius;
-  ctx.a.strokeStyle = `hsla(${hue},100%,60%,${fadeInOut(life, ttl)})`;
-  ctx.a.beginPath();
-  ctx.a.moveTo(x, y);
-  ctx.a.lineTo(x2, y2);
-  ctx.a.stroke();
-  ctx.a.closePath();
-  ctx.a.restore();
+  ctx.a!.save();
+  ctx.a!.lineCap = 'round';
+  ctx.a!.lineWidth = radius;
+  ctx.a!.strokeStyle = `hsla(${hue},100%,60%,${fadeInOut(life, ttl)})`;
+  ctx.a!.beginPath();
+  ctx.a!.moveTo(x, y);
+  ctx.a!.lineTo(x2, y2);
+  ctx.a!.stroke();
+  ctx.a!.closePath();
+  ctx.a!.restore();
 }
 
 function checkBounds(x: number, y: number) {
@@ -130,18 +136,16 @@ function createCanvas() {
     'a': document.createElement('canvas'),
     'b': document.createElement('canvas')
   };
-  canvas.b.style = `
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  `;
+  canvas.b.style.height = '100%';
+  canvas.b.style.left   = '0px';
+  canvas.b.style.top    = '0px';
+  canvas.b.style.width  = '100%';
   container!.appendChild(canvas.b);
   ctx = {
     'a': canvas.a.getContext('2d'),
     'b': canvas.b.getContext('2d')
   };
-  ctx.b.fillStyle = backgroundColor;
+  ctx.b!.fillStyle = backgroundColor;
   center = [];
 }
 
@@ -151,44 +155,44 @@ function resize() {
   canvas.a.width = innerWidth;
   canvas.a.height = innerHeight;
 
-  ctx.a.drawImage(canvas.b, 0, 0);
+  ctx.a!.drawImage(canvas.b, 0, 0);
 
   canvas.b.width = innerWidth;
   canvas.b.height = innerHeight;
 
-  ctx.b.drawImage(canvas.a, 0, 0);
+  ctx.b!.drawImage(canvas.a, 0, 0);
 
   center[0] = 0.5 * canvas.a.width;
   center[1] = 0.5 * canvas.a.height;
 }
 
 function renderGlow() {
-  ctx.b.save();
-  ctx.b.filter = 'blur(8px) brightness(200%)';
-  ctx.b.globalCompositeOperation = 'lighter';
-  ctx.b.drawImage(canvas.a, 0, 0);
-  ctx.b.restore();
+  ctx.b!.save();
+  ctx.b!.filter = 'blur(8px) brightness(200%)';
+  ctx.b!.globalCompositeOperation = 'lighter';
+  ctx.b!.drawImage(canvas.a, 0, 0);
+  ctx.b!.restore();
 
-  ctx.b.save();
-  ctx.b.filter = 'blur(4px) brightness(200%)';
-  ctx.b.globalCompositeOperation = 'lighter';
-  ctx.b.drawImage(canvas.a, 0, 0);
-  ctx.b.restore();
+  ctx.b!.save();
+  ctx.b!.filter = 'blur(4px) brightness(200%)';
+  ctx.b!.globalCompositeOperation = 'lighter';
+  ctx.b!.drawImage(canvas.a, 0, 0);
+  ctx.b!.restore();
 }
 
 function renderToScreen() {
-  ctx.b.save();
-  ctx.b.globalCompositeOperation = 'lighter';
-  ctx.b.drawImage(canvas.a, 0, 0);
-  ctx.b.restore();
+  ctx.b!.save();
+  ctx.b!.globalCompositeOperation = 'lighter';
+  ctx.b!.drawImage(canvas.a, 0, 0);
+  ctx.b!.restore();
 }
 
 function draw() {
   tick++;
 
-  ctx.a.clearRect(0, 0, canvas.a.width, canvas.a.height);
+  ctx.a!.clearRect(0, 0, canvas.a.width, canvas.a.height);
 
-  ctx.b.fillRect(0, 0, canvas.a.width, canvas.a.height);
+  ctx.b!.fillRect(0, 0, canvas.a.width, canvas.a.height);
 
   drawParticles();
   renderGlow();
@@ -198,7 +202,7 @@ function draw() {
 }
 
 export class SwirlEffect {
-  constructor(el: any) {
+  constructor(el: HTMLDivElement) {
     container = el;
     createCanvas();
     resize();
