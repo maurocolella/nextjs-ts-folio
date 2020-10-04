@@ -1,11 +1,13 @@
 @import './globals.scss';
 
 .navbar {
+  background-color: $base-light-color;
   box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.5);
   height: 52px;
   position: absolute;
   text-align: center;
   top: 312px;
+  transition: 0.8s ease background-color;
   width: 100%;
 
   &__nav {
@@ -25,7 +27,7 @@
     flex-direction: column;
 
     .navbar__link {
-      color: $base-link-color;
+      color: $base-dark-color;
       display: flex;
       flex-direction: column;
       font-weight: bold;
@@ -33,6 +35,7 @@
       justify-content: center;
       text-decoration: none;
       text-transform: uppercase;
+      transition: 0.8s ease color;
       width: 100%;
     }
 
@@ -45,5 +48,27 @@
         color: $highlight-color;
       }
     }
+  }
+
+  &--sticky {
+    background-color: $base-dark-color;
+    position: fixed;
+    top: 0;
+
+    .navbar {
+      &__link {
+        color: $base-light-color;
+      }
+
+      &__item {
+        &:hover {
+          border-bottom: 3px solid $base-light-color;
+          .navbar__link {
+            color: $base-light-color;
+          }
+        }
+      }
+    }
+
   }
 }
