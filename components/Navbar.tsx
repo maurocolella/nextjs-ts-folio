@@ -51,7 +51,8 @@ export class Navbar extends PureComponent<{}, State> {
 
     if (scrollOffset !== currentOffset) {
       this.setState({
-        currentOffset: (currentOffset + scrollOffset) / 2,
+        // Ensure not NaN
+        currentOffset: ((currentOffset || 0) + scrollOffset) / 2,
       });
     }
 
