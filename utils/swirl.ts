@@ -26,7 +26,7 @@ let center: Array<number>;
 let tick: number;
 let simplex: { noise3D: (arg0: number, arg1: number, arg2: number) => number; };
 let particleProps: Float32Array;
-let runnerHandle: number;
+let enabled = true;
 
 function initParticles() {
   tick = 0;
@@ -194,7 +194,7 @@ function draw() {
   renderGlow();
   renderToScreen();
 
-  runnerHandle = window.requestAnimationFrame(draw);
+  if (enabled) window.requestAnimationFrame(draw);
 }
 
 export class SwirlEffect {
@@ -209,8 +209,8 @@ export class SwirlEffect {
 
   destroy() {
     window.removeEventListener('resize', resize);
-    window.cancelAnimationFrame(runnerHandle);
+    enabled = false;
     container.removeChild(canvas.b);
-    delete canvas.a;
+    // delete canvas.a;
   }
 }

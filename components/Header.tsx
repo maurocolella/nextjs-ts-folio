@@ -50,13 +50,15 @@ export class Header extends Component<{}, State> {
       if (average > 50) {
         return this.setState({ 'effectVisible': true });
       }
+      fpsCounter!.pause();
       effect!.destroy();
     }
   }
 
   componentDidMount() {
+    const { fpsCounter } = this.state;
     this.setState({ effect: new SwirlEffect(this.effectCanvasRef.current) });
-    FPSCounter.play();
+    fpsCounter!.play();
     this.timer = setInterval(this.instrument, SAMPLING_INTERVAL);
   }
 
