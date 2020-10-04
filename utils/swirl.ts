@@ -141,6 +141,7 @@ function createCanvas() {
     'a': canvas.a.getContext('2d'),
     'b': canvas.b.getContext('2d')
   };
+  ctx.b.fillStyle = backgroundColor;
   center = [];
 }
 
@@ -187,7 +188,6 @@ function draw() {
 
   ctx.a.clearRect(0, 0, canvas.a.width, canvas.a.height);
 
-  ctx.b.fillStyle = backgroundColor;
   ctx.b.fillRect(0, 0, canvas.a.width, canvas.a.height);
 
   drawParticles();
