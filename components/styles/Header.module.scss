@@ -34,7 +34,7 @@
   width: 100vw;
   z-index: 1;
 
-  @media(min-width: 768px) {
+  @media(min-width: 1024px) {
     background-color: rgba(0, 12, 27, 0.45);
     width: $page-width;
   }
