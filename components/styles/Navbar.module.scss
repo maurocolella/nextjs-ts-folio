@@ -10,6 +10,20 @@
   transition: 0.8s ease background-color;
   width: 100%;
 
+  &__wrapper {
+    height: 100%;
+    position: relative;
+  }
+
+  &__progress {
+    background-color: $base-dark-color;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: 0.1s ease width, 1s ease background-color;
+  }
+
   &__nav {
     display: flex;
     justify-content: space-around;
@@ -56,6 +70,10 @@
     top: 0;
 
     .navbar {
+      &__progress {
+        background-color: $base-light-color;
+      }
+
       &__link {
         color: $base-light-color;
       }

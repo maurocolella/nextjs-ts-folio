@@ -34,6 +34,7 @@
         144
       ]
     },
+    "prefer-const": true,
     "no-any": {
       "severity": "warning"
     },
